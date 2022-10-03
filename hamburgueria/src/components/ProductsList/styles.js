@@ -8,11 +8,13 @@ export const ProductsUl = styled.ul`
     min-width: 290px;
     padding: 10px;
     width: 80%;
+    margin-top: -15px;
 
     @media screen and (min-width:950px) {
-        width: 60%;
+        width: 85%;
         flex-wrap: wrap;
         overflow: none;
-        margin: 0;
+        margin: 0 auto;
+        margin-top: -20px;
     }
 `

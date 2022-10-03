@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { CartAddRemove } from './components/CartAddRemove/CartAddRemove';
 import { Header } from './components/Header/Header';
 import { ProductsList } from './components/ProductsList/ProductsList';
-import Total from './components/CartTotal/CartTotal';
 import { DivHeader } from "./components/Header/styles"
 import { Resultados } from './components/Resultados/Resultados';
 import { BtnNullFilter } from './components/BtnNullFilter/BtnNullFilter';
@@ -19,12 +18,7 @@ function App() {
 
   const [cartTotal, setCartTotal] = useState(0)
 
-  const filteredProducts = products.filter((item) => {
-    if(!input) {
-      return item
-    }
-      return item.name.toLowerCase().includes(input.toLowerCase())
-  })
+  const [filteredProducts, setFilteredProducts] = useState([])
 
   const removeProducts = () => {
     return setCart([])
@@ -51,22 +45,30 @@ function App() {
   useEffect(() => {
     fetch(`https://hamburgueria-kenzie-json-serve.herokuapp.com/products`)
     .then(res => res.json())
-    .then(res => setProducts(res))
+    .then(res => {
+      setProducts(res)
+      setFilteredProducts(res)
+    })
     .catch(err => console.log(err))
     
   }, [])
   
   return (
     <div className='App'>
-        <Header DivHeader={DivHeader} setInput={setInput} products={products} cart={cart} setCart={setCart}/>
-        <Resultados input={input} />
+        <Header DivHeader={DivHeader} input={input} setInput={setInput} products={products} setFilteredProducts={setFilteredProducts} cart={cart} setCart={setCart}/>
 
       <div className='Main'>
 
+      <div className='HeaderPrinc'>
+        <div className='HeaderSub'>
+          <Resultados input={input} />
+          <BtnNullFilter setCart={setCart} setProducts={setProducts} products={products} setFilteredProducts={setFilteredProducts} />
+        </div>
+          <ProductsList products={products} filteredProducts={filteredProducts} cart={cart} setCart={setCart} />
+      </div>
 
-        <ProductsList products={products} filteredProducts={filteredProducts} cart={cart} setCart={setCart} />
-      
         <CartAddRemove cart={cart} setCart={setCart} size={size} products={products} cartTotal={cartTotal} removeProducts={removeProducts} />
+      
       </div>
 
     </div>

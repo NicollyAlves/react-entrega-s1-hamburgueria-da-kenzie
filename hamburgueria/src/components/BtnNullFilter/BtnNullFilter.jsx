@@ -1,24 +1,17 @@
 import { ProductsList } from "../ProductsList/ProductsList";
 import { ProductsWithoutFilter } from "../ProductsWithoutFilter/ProductsWithoutFilter";
+import { Button } from "./styles";
 
-export const BtnNullFilter = ({ handleClick, cart, setCart, products }) => {
-    /*const todos = ({handleClick, cart, setCart, products}) => {
-        return (
-            <div>
-                <ProductsWithoutFilter handleClick={handleClick} cart={cart} setCart={setCart} products={products} />
-            </div>
-        )
-    }*/
+export const BtnNullFilter = ({products, setFilteredProducts }) => {
 
-    const todos = () => {
-        return(
-            <div>
-                <ProductsWithoutFilter handleClick={handleClick} cart={cart} setCart={setCart} products={products} />
-            </div>
-        )
+    const todos = (e, products, setFilteredProducts) => {
+        e.preventDefault()
+        console.log(products);
+        setFilteredProducts(products)
+
     }
 
     return (
-        <button onClick={() => {todos()}} >Apagar filtro</button>
+        <Button onClick={(e) => {todos(e, products, setFilteredProducts)}} >Limpar busca</Button>
     )
 }

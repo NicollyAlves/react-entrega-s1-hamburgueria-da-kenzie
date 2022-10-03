@@ -5,6 +5,7 @@ export const AsideCart = styled.aside`
     flex-direction: column;
     margin-top: 20px;
     position: relative;
+    padding: 10px;
     `
 export const TituloCart = styled.h2`
     background-color: var(--Color-primary);

@@ -2,12 +2,11 @@ import styled from "styled-components"
 
 export const DivResultados = styled.div`
     display: flex;
-    margin: 0 auto;
     font-size: 24px;
     font-weight: 600;
     flex-direction: row;
     flex-wrap: wrap;
-    margin-top: 15px;
+    margin-top: 25px;
 `
 export const DivText = styled.div`
     color: var(--gray-100);
